@@ -1,0 +1,87 @@
+﻿生成启动时间为 2018/10/24 16:48:04。
+     1>项目“H:\ProjectsOfVS2013\2013项目\goodFeaturesToTrack\goodFeaturesToTrack\goodFeaturesToTrack.vcxproj”在节点 2 上(Rebuild 个目标)。
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(388,5): warning MSB8028: The intermediate directory (Release\) contains files shared from another project (goodFeaturesToTrack.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+     1>ClCompile:
+         H:\VS2013\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _LIB /D _CRT_SECURE_NO_WARNINGS /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Release\CamIPM.pch" /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         H:\VS2013\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _LIB /D _CRT_SECURE_NO_WARNINGS /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Release\CamIPM.pch" /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Main.cpp IPMSolver.cpp PNPSolver.cpp SVSolver.cpp
+         Main.cpp
+     1>h:\projectsofvs2013\2013项目\goodfeaturestotrack\goodfeaturestotrack\PNPSolver.h(119): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+     1>Main.cpp(15): warning C4305: “初始化”: 从“double”到“const float”截断
+     1>Main.cpp(16): warning C4305: “初始化”: 从“double”到“const float”截断
+     1>Main.cpp(186): warning C4244: “=”: 从“const float”转换到“int”，可能丢失数据
+     1>Main.cpp(187): warning C4244: “=”: 从“const float”转换到“int”，可能丢失数据
+     1>Main.cpp(217): warning C4018: “<”: 有符号/无符号不匹配
+     1>Main.cpp(221): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+     1>Main.cpp(342): warning C4800: “int”: 将值强制为布尔值“true”或“false”(性能警告)
+     1>Main.cpp(472): warning C4244: “参数”: 从“const float”转换到“int”，可能丢失数据
+     1>Main.cpp(480): warning C4244: “参数”: 从“const float”转换到“int”，可能丢失数据
+     1>Main.cpp(487): warning C4244: “参数”: 从“const float”转换到“int”，可能丢失数据
+     1>Main.cpp(490): warning C4244: “参数”: 从“const float”转换到“int”，可能丢失数据
+         IPMSolver.cpp
+     1>IPMSolver.cpp(11): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>IPMSolver.cpp(12): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>IPMSolver.cpp(13): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>IPMSolver.cpp(14): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>IPMSolver.cpp(15): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>IPMSolver.cpp(26): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>IPMSolver.cpp(41): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+     1>IPMSolver.cpp(42): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+     1>IPMSolver.cpp(43): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+     1>IPMSolver.cpp(44): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+     1>IPMSolver.cpp(56): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>IPMSolver.cpp(57): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>IPMSolver.cpp(60): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>IPMSolver.cpp(61): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>IPMSolver.cpp(62): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>IPMSolver.cpp(81): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>IPMSolver.cpp(82): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>IPMSolver.cpp(83): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>IPMSolver.cpp(85): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>IPMSolver.cpp(86): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>IPMSolver.cpp(87): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>IPMSolver.cpp(90): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>IPMSolver.cpp(91): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>IPMSolver.cpp(94): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>IPMSolver.cpp(95): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>IPMSolver.cpp(135): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+     1>IPMSolver.cpp(163): warning C4244: “=”: 从“float”转换到“uchar”，可能丢失数据
+     1>IPMSolver.cpp(114): warning C4101: “tig”: 未引用的局部变量
+     1>IPMSolver.cpp(194): warning C4018: “<”: 有符号/无符号不匹配
+     1>IPMSolver.cpp(238): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+         PNPSolver.cpp
+     1>h:\projectsofvs2013\2013项目\goodfeaturestotrack\goodfeaturestotrack\PNPSolver.h(119): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+     1>PNPSolver.cpp(96): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>PNPSolver.cpp(97): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>PNPSolver.cpp(98): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>PNPSolver.cpp(102): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>PNPSolver.cpp(103): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>PNPSolver.cpp(104): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>PNPSolver.cpp(124): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>PNPSolver.cpp(125): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>PNPSolver.cpp(126): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>PNPSolver.cpp(135): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>PNPSolver.cpp(136): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>PNPSolver.cpp(137): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>PNPSolver.cpp(174): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+         SVSolver.cpp
+     1>SVSolver.cpp(20): warning C4305: “初始化”: 从“double”到“float”截断
+     1>SVSolver.cpp(42): warning C4018: “<”: 有符号/无符号不匹配
+     1>SVSolver.cpp(45): warning C4244: “+=”: 从“double”转换到“float”，可能丢失数据
+     1>SVSolver.cpp(48): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>SVSolver.cpp(56): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+       Link:
+         H:\VS2013\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"H:\ProjectsOfVS2013\2013项目\goodFeaturesToTrack\Release\CamIPM.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:H:\opencv3.4.10\opencv\build\x64\vc15\lib opencv_calib3d2410.lib opencv_contrib2410.lib opencv_core2410.lib opencv_features2d2410.lib opencv_flann2410.lib opencv_gpu2410.lib opencv_highgui2410.lib opencv_imgproc2410.lib opencv_legacy2410.lib opencv_ml2410.lib opencv_nonfree2410.lib opencv_objdetect2410.lib opencv_ocl2410.lib opencv_photo2410.lib opencv_stitching2410.lib opencv_superres2410.lib opencv_ts2410.lib opencv_video2410.lib opencv_videostab2410.lib opencv_calib3d2410d.lib opencv_contrib2410d.lib opencv_core2410d.lib opencv_features2d2410d.lib opencv_flann2410d.lib opencv_gpu2410d.lib opencv_highgui2410d.lib opencv_imgproc2410d.lib opencv_legacy2410d.lib opencv_ml2410d.lib opencv_nonfree2410d.lib opencv_objdetect2410d.lib opencv_ocl2410d.lib opencv_photo2410d.lib opencv_stitching2410d.lib opencv_superres2410d.lib opencv_video2410d.lib opencv_videostab2410d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"H:\ProjectsOfVS2013\2013项目\goodFeaturesToTrack\Release\CamIPM.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"H:\ProjectsOfVS2013\2013项目\goodFeaturesToTrack\Release\CamIPM.lib" /MACHINE:X86 /SAFESEH Release\Main.obj
+         Release\IPMSolver.obj
+         Release\PNPSolver.obj
+         Release\stdafx.obj
+         Release\SVSolver.obj
+         正在生成代码
+     1>h:\projectsofvs2013\2013项目\goodfeaturestotrack\goodfeaturestotrack\ipmsolver.cpp(269): warning C4715: “IPMSolver::getTrend”: 不是所有的控件路径都返回值
+         已完成代码的生成
+         goodFeaturesToTrack.vcxproj -> H:\ProjectsOfVS2013\2013项目\goodFeaturesToTrack\Release\CamIPM.exe
+     1>已完成生成项目“H:\ProjectsOfVS2013\2013项目\goodFeaturesToTrack\goodFeaturesToTrack\goodFeaturesToTrack.vcxproj”(Rebuild 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:06.60

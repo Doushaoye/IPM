@@ -1,0 +1,79 @@
+bool RodriguesToAngle(cv::Mat RoteM,double &Theta_W2C_X,double &Theta_W2C_Y,double &Theta_W2C_Z)
+{
+	double r11 = RoteM.ptr<double>(0)[0];
+	double r12 = RoteM.ptr<double>(0)[1];
+	double r13 = RoteM.ptr<double>(0)[2];
+	double r21 = RoteM.ptr<double>(1)[0];
+	double r22 = RoteM.ptr<double>(1)[1];
+	double r23 = RoteM.ptr<double>(1)[2];
+	double r31 = RoteM.ptr<double>(2)[0];
+	double r32 = RoteM.ptr<double>(2)[1];
+	double r33 = RoteM.ptr<double>(2)[2];
+	double thetaz = atan2(r21, r11);
+	double thetay = atan2(-1 * r31, sqrt(r32*r32 + r33*r33));
+	double thetax = atan2(r32, r33);
+	Theta_W2C_X = -1 * thetax;
+	Theta_W2C_y = -1 * thetay;
+	Theta_W2C_Z = -1 * thetaz;
+}
+
+
+double aotuCamlib(
+std::vector<cv::Point2f> line，
+cv::Point2f &Thetax //初始欧拉角X轴角度
+)
+{
+	std::vector<cv::Point2f> undistort_line;
+	double low = Thetax.x - 0.1;
+	double high = Thetax.x + 0.1;
+	double mid;
+	//int count = 0;
+	while (low < high)
+	{
+		mid = (low + high) / 2;
+		//设置欧拉角
+		Thetax.x = mid;
+		c1 = cos(Thetax.x);
+		s1 = sin(Thetax.x);
+		float tig[16];
+		setH2(tig);
+		cv::Mat Titog(4, 4, CV_32FC1, tig); //图像to世界矩阵
+		//cout << Titog << endl;
+		//count++;
+
+		for (int i = 0; i < line.size(); i++)
+		{
+			float Xi = line[i].x;
+			float Yi = line[i].y;
+			float Pif[4] = { Xi, Yi, 1, 1 }; //Pi 图像坐标系点位
+			cv::Mat Pi(4, 1, CV_32FC1, Pif);
+			//std::cout << Pi << std::endl;
+			cv::Mat Pg = Titog*Pi; //计算得到世界坐标系下对应点坐标
+			cv::Point2f P(Pg.at<float>(0, 0) / Pg.at<float>(3, 0), Pg.at<float>(1, 0) / Pg.at<float>(3, 0));
+			//std::cout << P << std::endl;
+
+			undistort_line.push_back(P);
+		}
+		double Error;
+		bool Trend = getTrend(undistort_line, Error);
+		if (fabs(Error) < 0.5)
+		{
+			break;
+		}
+		else
+		{
+			undistort_line.clear();
+			if (Trend)
+			{
+				high = mid ;
+			}
+			else
+			{
+				low = mid ;
+			}
+		}
+			
+	}
+
+	return mid;
+}
