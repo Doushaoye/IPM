@@ -1,0 +1,8 @@
+
+*.tlog
+*.suo
+*.obj
+*.ipch
+*.sdf
+*.log
+*.exe

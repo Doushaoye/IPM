@@ -130,13 +130,14 @@ int IPMSolver::Solve(cv::Mat &input, cv::Mat &output, float xSize, float ySize)
 
 	//cout << Titog << endl;
 
-	for (int i = 0; i < output.cols; i++)
+	for (int j = 0; j < output.rows; j++)
 	{
-		float Xp = (i - 0.5*output.cols) * xSize;
-		for (int j = 0; j < output.rows; j++)
+		float Yp = (output.rows - j) * ySize;
+		uchar *out_p = output.ptr<uchar>(j);
+		for (int i = 0; i < output.cols; i++)
 		{
-			float Yp = (output.rows - j) * ySize;
-
+			
+			float Xp = (i - 0.5*output.cols) * xSize;
 			float Pgf[4] = { Xp, Yp, -H, 1 }; //Pg 世界坐标系点位
 			cv::Mat Pg(4, 1, CV_32FC1, Pgf);
 			//cout << Tgtoi*Pg << endl;
@@ -155,8 +156,8 @@ int IPMSolver::Solve(cv::Mat &input, cv::Mat &output, float xSize, float ySize)
 			cv::Point p[4]; //周围四个角
 			float a[4]; //插值系数
 			getInterpolationRatio(P, a, p); //计算双线性差值系数
-			cv::circle(input, P, 3, 0, -1);
-			if (p[3].x < src.cols&&p[3].y < src.rows &&p[0].x>0 && p[0].y >0)
+			//cv::circle(input, P, 3, 0, -1);
+			/*if (p[3].x < src.cols&&p[3].y < src.rows &&p[0].x>0 && p[0].y >0)
 			{
 
 				output.at<uchar>(j, i) = a[0] * src.at<uchar>(p[0].y, p[0].x) + a[1] * src.at<uchar>(p[1].y, p[1].x)
@@ -165,8 +166,16 @@ int IPMSolver::Solve(cv::Mat &input, cv::Mat &output, float xSize, float ySize)
 			else
 			{
 				output.at<uchar>(j, i) = 0;
+			}*/
+			if (P.inside(cv::Rect(0, 0, input.cols, input.rows)))
+			{
+				out_p[i] = a[0] * src.at<uchar>(p[0].y, p[0].x) + a[1] * src.at<uchar>(p[1].y, p[1].x)
+					+ a[2] * src.at<uchar>(p[2].y, p[2].x) + a[3] * src.at<uchar>(p[3].y, p[3].x);
 			}
-			
+			else
+			{
+				out_p[i] = 0;
+			}
 		}
 	}
 	//cout << output << endl;
