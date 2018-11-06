@@ -14,12 +14,12 @@
 const float gridSide = 6.5; //厘米
 const float fov_H = 53.8; //度
 const float fov_V = 31.4;
-const float H = 149.5; //厘米
+const float H = 155.5; //厘米
 
-const float ipm_x = 5;//厘米
-const float ipm_y = 5;//厘米
-const float ipm_Y = 1000;//像素
-const float ipm_X = 240;//像素
+const float ipm_x = 1;//厘米
+const float ipm_y = 1;//厘米
+const float ipm_Y = 3500;//像素
+const float ipm_X = 1500;//像素
 const int image_w = 1280;
 const int image_h = 720;
 cv::Mat outRoi;
@@ -64,36 +64,6 @@ int getMandD(std::string path, camera_info &info)
 	
 }
 
-//void getPlanarSurface(std::vector<cv::Point2f> imgP, cv::Mat objPM, camera_info info,cv::Mat &rvec,cv::Mat &tvec,cv::Mat &cvec)
-//{
-//
-//	//cv::Mat Rvec;
-//	cv::Mat_<float> Rvec;
-//	cv::Mat_<float> Tvec;
-//	//cv::Mat raux, taux;
-//	///////////////////////////////////////
-//	std::cout << rvec << tvec << std::endl;
-//	std::cout << info.camera_matrix << std::endl;
-//	std::cout << info.distortion_coefficients << std::endl;
-//	//Rodrigues(rotM, rvec);
-//	cv::solvePnP(objPM, cv::Mat(imgP), info.camera_matrix, info.distortion_coefficients, rvec, tvec);
-//	//Rodrigues(rvec, rotM);
-//
-//	//cout << "rotation matrix: " << endl << rotM << endl;
-//	//cout << "translation matrix: " << endl << tv[0] << " " << tv[1] << " " << tv[2] << endl;
-//	rvec.convertTo(Rvec, CV_32F);    //旋转向量
-//	tvec.convertTo(Tvec, CV_32F);   //平移向量
-//
-//	cv::Mat_<float> rotMat(3, 3);
-//	cv::Rodrigues(Rvec, rotMat);  //由于solvePnP返回的是旋转向量，故用罗德里格斯变换变成旋转矩阵
-//	/*projectedPoints.clear();
-//	projectPoints(objPM, rvec, tvec, info.camera_matrix, info.distortion_coefficients, projectedPoints);
-//
-//	for (unsigned int i = 0; i < projectedPoints.size(); ++i)
-//	{
-//		circle(image, projectedPoints[i], 3, Scalar(255, 0, 0), -1, 8);
-//	}*/
-//}
 
 //棋盘格自动检测，亚像素精确化
 void getCorner(cv::Mat src, cv::Point Mouse, cv::Point2f &Corner, cv::Size rect = cv::Size(20,20))
@@ -344,14 +314,11 @@ int _tmain(int argc, _TCHAR* argv[])
 	{
 		return -1;
 	}
-	//std::cout << info1.camera_matrix << std::endl;
-	//std::cout << info1.distortion_coefficients << std::endl;
 	cv::VideoCapture cam;
-	
-	//cv::namedWindow("frame", CV_WINDOW_NORMAL);
+
 	cam.open(0);
-	cam.set(CV_CAP_PROP_FRAME_WIDTH, image_w);
-	cam.set(CV_CAP_PROP_FRAME_HEIGHT, image_h);
+	cam.set(CV_CAP_PROP_FRAME_WIDTH, 1280);
+	cam.set(CV_CAP_PROP_FRAME_HEIGHT, 720);
 	cv::Mat image_color_src;
 	cv::Mat image_color;
 
@@ -361,33 +328,36 @@ int _tmain(int argc, _TCHAR* argv[])
 	cv::Mat newCameraMatrix = info1.camera_matrix.clone();
 	newCameraMatrix.at<double>(0, 2) = 1280.0/ 2.0;
 	newCameraMatrix.at<double>(1, 2) = 720.0/ 2.0;
-	//cout << newCameraMatrix << endl;
 	cv::Mat frame;
 	while (true)
 	{
-
-		cam >> frame;
-		if (frame.empty())
-			continue;
-		cv::undistort(frame, image_color_src, info1.camera_matrix, info1.distortion_coefficients);
-		//image_color_src.copyTo(image_color);
-		cv::line(image_color_src, cv::Point2f(camera_x - 1, 0), cv::Point(camera_x, image_color_src.rows), cv::Scalar(0, 0, 255), 1);
-		cv::line(image_color_src, cv::Point2f(0, camera_y - 1), cv::Point(image_color_src.cols, camera_y-1), cv::Scalar(0, 0, 255), 1);
-		cv::imshow("frame", image_color_src);
-		if (cv::waitKey(30) == VK_ESCAPE)
-		{
-			image_color = frame;
-		}
-		else
-		{
-			continue;
-		}
-
-
 		//****************************开启摄像头现场取景标定****************************************************
-		//image_color = cv::imread("8mm.jpg", cv::IMREAD_COLOR);
+		//cam >> frame;
+		//if (frame.empty())
+		//	continue;
+		//cv::undistort(frame, image_color_src, info1.camera_matrix, info1.distortion_coefficients);
+		////image_color_src.copyTo(image_color);
+		//cv::line(image_color_src, cv::Point2f(camera_x - 1, 0), cv::Point(camera_x, image_color_src.rows), cv::Scalar(0, 0, 255), 1);
+		//cv::line(image_color_src, cv::Point2f(0, camera_y - 1), cv::Point(image_color_src.cols, camera_y-1), cv::Scalar(0, 0, 255), 1);
+		//cv::imshow("frame", image_color_src);
+		//if (cv::waitKey(30) == VK_ESCAPE)
+		//{
+		//	image_color = frame;
+		//}
+		//else
+		//{
+		//	continue;
+		//}
+
 		//****************************读取硬盘内图片标定****************************************************
-		//cv::undistort(image_color_src, image_color, info1.camera_matrix, info1.distortion_coefficients);
+		
+		image_color = cv::imread("11_5_2.jpg", cv::IMREAD_COLOR);
+		cv::imshow("frame", image_color);
+		if (cv::waitKey(0) == VK_ESCAPE)
+		{
+
+		}
+		
 		cv::Mat image_g;
 		cv::cvtColor(image_color, image_g, CV_BGR2GRAY);
 		//cv::equalizeHist(image_g, image_g);
@@ -397,7 +367,6 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		std::vector<cv::Point2f> imgP;
 		//cv::setMouseCallback("img", on_mouse, &calib);//调用回调函数  
-		//cv::Mat ROI = image_color(cv::Rect(0, 0, 1920, 540));
 		bool isfind = cv::findChessboardCorners(image_g, cv::Size(3, 15), imgP, cv::CALIB_CB_ADAPTIVE_THRESH | cv::CALIB_CB_NORMALIZE_IMAGE);
 		if (!isfind)
 		{
@@ -406,43 +375,30 @@ int _tmain(int argc, _TCHAR* argv[])
 		}
 
 		cv::cornerSubPix(image_g, imgP, cv::Size(11, 11), cv::Size(-1, -1), cv::TermCriteria(CV_TERMCRIT_EPS + CV_TERMCRIT_ITER, 30, 0.01));
-		//cv::find4QuadCornerSubpix(image_g, imgP, cv::Size(3, 3));
 		bool isdraw = false;
 		cv::drawChessboardCorners(image_g, cv::Size(3, 15), imgP, isdraw);
-
-		//SVSolver SV;
-		//vector<cv::Mat> k;
-		//cv::Size s(5, 5);
-		//SV.SetKernal(s,k);
-
-		//vector<cv::Point2f> p;
-		//SV.SlidingWnd(image_g,p,s,k );
 
 		cv::imshow("img", image_g);
 
 
 		//setImgP(imgP);
 		//****************************初始化PNP类并进行PNP计算****************************************************
-		PNPSolver p4psolver;
+		PNPSolver p4psolver(info1.camera_matrix, info1.distortion_coefficients, objP, imgP,H);
 		//if (cv::waitKey(0) == VK_SPACE)
 		if (1)
 		{
-			//imgP = calib.m_point;
-			//getPlanarSurface(imgP, objPM,info1,rvec,tvec,cvec);
-			//初始化PNPSolver类
+			////初始化相机参数
+			//p4psolver.SetCameraMatrix(info1.camera_matrix);
+			////设置畸变参数
+			//p4psolver.SetDistortionCoefficients(info1.distortion_coefficients);
+			////设置特征点的世界坐标
+			//p4psolver.Points3D = objP;
 
-			//初始化相机参数
-			p4psolver.SetCameraMatrix(info1.camera_matrix);
-			//设置畸变参数
-			p4psolver.SetDistortionCoefficients(info1.distortion_coefficients);
-			//设置特征点的世界坐标
-			p4psolver.Points3D = objP;
+			//cout << "test2:特征点世界坐标 = " << endl << p4psolver.Points3D << endl;
+			////设置特征点的图像坐标
+			//p4psolver.Points2D = imgP;
 
-			cout << "test2:特征点世界坐标 = " << endl << p4psolver.Points3D << endl;
-			//设置特征点的图像坐标
-			p4psolver.Points2D = imgP;
-
-			cout << "test2:图中特征点坐标 = " << endl << p4psolver.Points2D << endl;
+			//cout << "test2:图中特征点坐标 = " << endl << p4psolver.Points2D << endl;
 
 			/*if (p4psolver.Solve(PNPSolver::METHOD::CV_P3P) == 0)
 				cout << "test2:CV_P3P方法:  相机位姿→" << "Oc坐标=" << p4psolver.Position_OcInW << "    相机旋转=" << p4psolver.Theta_W2C << endl;
@@ -451,25 +407,20 @@ int _tmain(int argc, _TCHAR* argv[])
 			if (p4psolver.Solve(PNPSolver::METHOD::CV_EPNP) == 0)
 				cout << "test2:CV_EPNP方法: 相机位姿→" << "Oc坐标=" << p4psolver.Position_OcInW << "    相机旋转=" << p4psolver.Theta_W2C << endl;
 		}
-		cv::FileStorage Theta("Theta.yml", cv::FileStorage::WRITE);
-		Theta << "Theta_W2C" << p4psolver.Theta_W2C;
+		std::string yml = "Theta_W2C.yml";
+		p4psolver.PNPout(yml);
 		//****************************初始化PNP类并进行PNP计算****************************************************
 		//****************************初始化IPM类并进行IPM计算****************************************************
 		//float thetax = p4psolver.Theta_W2C.x;
 		//p4psolver.Theta_W2C.x += 0.2;
 		IPMSolver ipm(p4psolver.Theta_W2C, info1.camera_matrix, H);
 		cv::Mat image_gray, image_gray_src;
-		image_gray_src = cv::imread("8mm.png", 0);
+		image_gray_src = cv::imread("11_5_2.jpg", 0);
+		
+		//cv::cvtColor(frame.clone(), image_gray_src, CV_BGR2GRAY);
 
-		//image_gray_src = frame.clone();
 
-
-		//cv::cvtColor(image_gray_src, image_gray_src, CV_BGR2GRAY);
-		//cv::Mat newcameramatrix = info1.camera_matrix;
-		//newcameramatrix.at<double>(0, 2) = image_w / 2.0;
-		//newcameramatrix.at<double>(1, 2) = image_h / 2.0;
 		cv::undistort(image_gray_src, image_gray, info1.camera_matrix, info1.distortion_coefficients);
-		//cv::cvtColor(image_color, image_gray, CV_BGR2GRAY);
 		//****************************进行自动校准，得到校准俯仰角更新IPM类中的参数，重新进行IPM计算****************************************************
 		image_gray.copyTo(calib.m_src);
 		//cv::imshow("image_gray", calib.m_src);
@@ -482,52 +433,31 @@ int _tmain(int argc, _TCHAR* argv[])
 			cv::Mat out(ipm_Y, ipm_X, CV_8UC1);
 
 			//if (calib.m_point.size() == 4)
-			if (1)
+			if (0)
 			{
-
+				int lastY;
 				ipm.aotuCamlib(calib.m_point);
-				int isolve = ipm.Solve(image_gray, out, ipm_x, ipm_y);
+				int isolve = ipm.Solve(image_gray, out, lastY, ipm_x, ipm_y);
 				//cv::namedWindow("IPM_image", CV_WINDOW_NORMAL);
-				outRoi = out(cv::Rect(0, 0, ipm_X, ipm_Y));
+				outRoi = out(cv::Rect(0, 0, ipm_X, lastY));
 
 
 			}
 			else
 			{
+				int lastY;
 				std::cout << "输入平行线数量不等于2,不校正" << std::endl;
 				cv::Mat out(ipm_Y, ipm_X, CV_8UC1);
-				int isolve = ipm.Solve(image_gray, out, ipm_x, ipm_y);
+				int isolve = ipm.Solve(image_gray, out, lastY, ipm_x, ipm_y);
 				//cv::namedWindow("IPM_image", CV_WINDOW_NORMAL);
-				outRoi = out(cv::Rect(0, 0, ipm_X, ipm_Y));
+				outRoi = out(cv::Rect(0, 0, ipm_X, lastY));
 
 			}
-
-
+			cv::imshow("image_gray", image_gray);
+			cv::namedWindow("IPM_image", CV_WINDOW_NORMAL);
 			cv::imshow("IPM_image", outRoi);
-			//cv::setMouseCallback("IPM_image", on_mouse_out);//调用回调函数  
+			cv::setMouseCallback("IPM_image", on_mouse_out);//调用回调函数  
 		}
-		/*cam.open(0);
-		cam.set(CV_CAP_PROP_FRAME_WIDTH, image_w);
-		cam.set(CV_CAP_PROP_FRAME_HEIGHT, image_h);
-		while (true)
-		{
-		cv::Mat frame;
-		cam >> frame;
-		if (frame.empty())
-		continue;
-		cv::Mat outrealtime(ipm_Y, ipm_X, CV_8UC1);
-		int isolve = ipm.Solve(frame, outrealtime, ipm_x, ipm_y);
-		cv::namedWindow("realtime", CV_WINDOW_NORMAL);
-		outrealtimeRoi = outrealtime(cv::Rect(0, 0, ipm_X, ipm_Y - 500));
-		cv::imshow("realtime", outrealtimeRoi);
-		if (cv::waitKey(30) == VK_ESCAPE)
-		{
-		cam.release();
-		break;
-		}
-
-		}*/
-
 		//****************************进行自动校准，得到校准俯仰角更新IPM类中的参数，重新进行IPM计算****************************************************
 		//****************************初始化IPM类并进行IPM计算****************************************************
 		cv::waitKey(10);

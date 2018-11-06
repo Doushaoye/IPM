@@ -19,9 +19,10 @@ class PNPSolver
 public:
 	PNPSolver();
 	//带参数初始化
-	PNPSolver(double fx, double fy, double u0, double v0, double k_1, double  k_2, double  p_1, double  p_2, double k_3);
+	PNPSolver(cv::Mat &M, cv::Mat &D, vector<cv::Point3f> p3D, vector<cv::Point2f> p2D ,float H);
 	~PNPSolver();
-
+	float camera_h;
+	bool PNPout(std::string ymlpath);
 	enum METHOD
 	{
 		CV_ITERATIVE = CV_ITERATIVE,

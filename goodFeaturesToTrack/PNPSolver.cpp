@@ -4,16 +4,15 @@
 PNPSolver::PNPSolver()
 {
 	//初始化输出矩阵
-	vector<double> rv(3), tv(3);
-	cv::Mat rvec(rv), tvec(tv);
 }
-PNPSolver::PNPSolver(double fx, double fy, double u0, double v0, double k_1, double  k_2, double  p_1, double  p_2, double k_3)
+PNPSolver::PNPSolver(cv::Mat &M, cv::Mat &D, vector<cv::Point3f> p3D, vector<cv::Point2f> p2D, float H)
 {
 	//初始化输出矩阵
-	vector<double> rv(3), tv(3);
-	cv::Mat rvec(rv), tvec(tv);
-	//SetCameraMatrix(fx, fy, u0, v0);
-	//SetDistortionCoefficients(k_1, k_2, p_1, p_2, k_3);
+	SetCameraMatrix(M);
+	SetDistortionCoefficients(D);
+	Points3D = p3D;
+	camera_h = H;
+	Points2D = p2D;
 }
 
 PNPSolver::~PNPSolver()
@@ -139,6 +138,25 @@ int PNPSolver::Solve(METHOD method)
 	return 0;
 }
 
+bool PNPSolver::PNPout(std::string yml)
+{
+	cv::FileStorage out;
+	out.open(yml, cv::FileStorage::WRITE);
+	if (out.isOpened())
+	{
+	
+		out<<"H" << camera_h;
+		out << "Theta" << Theta_W2C;
+		out.release();
+		return true;
+	}
+	else
+	{
+		cout << "角度文件输出失败" << endl;
+		return false;
+	}
+	
+}
 
 //根据计算出的结果将世界坐标重投影到图像，返回像素坐标点集
 //输入为世界坐标系的点坐标集合

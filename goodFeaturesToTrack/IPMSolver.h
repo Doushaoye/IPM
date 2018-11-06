@@ -32,7 +32,7 @@ public:
 	float c1, c2, s1, s2; //c1=cos(cu)
 	bool getTrend(std::vector<cv::Point2f> line, double &error);
 	int aotuCamlib(std::vector<cv::Point2f> line);
-	int Solve(cv::Mat &input, cv::Mat &output, float xSize, float ySize);
+	int Solve(cv::Mat &input, cv::Mat &output,int &lastY, float xSize, float ySize);
 	void getInterpolationRatio(cv::Point2f P, float a[], cv::Point p[]);
 	int setH(float a[]);
 	int setH2(float a[]);

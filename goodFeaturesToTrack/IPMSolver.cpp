@@ -99,7 +99,7 @@ int IPMSolver::setH2(float *a)
 }
 
 //逆透视变换处理，参数3,4位逆透视图的单位尺度
-int IPMSolver::Solve(cv::Mat &input, cv::Mat &output, float xSize, float ySize)
+int IPMSolver::Solve(cv::Mat &input, cv::Mat &output,  int &lastY,float xSize, float ySize)
 {
 	
 	if (input.channels() != 1 && output.channels() != 1)
@@ -156,8 +156,9 @@ int IPMSolver::Solve(cv::Mat &input, cv::Mat &output, float xSize, float ySize)
 			cv::Point p[4]; //周围四个角
 			float a[4]; //插值系数
 			getInterpolationRatio(P, a, p); //计算双线性差值系数
-			//cv::circle(input, P, 3, 0, -1);
-			/*if (p[3].x < src.cols&&p[3].y < src.rows &&p[0].x>0 && p[0].y >0)
+			cv::circle(input, P, 3, 0, -1);
+			
+		/*	if (p[3].x < src.cols&&p[3].y < src.rows &&p[0].x>0 && p[0].y >0)
 			{
 
 				output.at<uchar>(j, i) = a[0] * src.at<uchar>(p[0].y, p[0].x) + a[1] * src.at<uchar>(p[1].y, p[1].x)
@@ -171,6 +172,10 @@ int IPMSolver::Solve(cv::Mat &input, cv::Mat &output, float xSize, float ySize)
 			{
 				out_p[i] = a[0] * src.at<uchar>(p[0].y, p[0].x) + a[1] * src.at<uchar>(p[1].y, p[1].x)
 					+ a[2] * src.at<uchar>(p[2].y, p[2].x) + a[3] * src.at<uchar>(p[3].y, p[3].x);
+				if (P.y - input.rows < 1)
+				{
+					lastY = j;
+				}
 			}
 			else
 			{
